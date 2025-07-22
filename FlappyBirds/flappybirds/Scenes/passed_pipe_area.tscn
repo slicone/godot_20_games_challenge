@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dal182j2e3bnx"]
+
+[ext_resource type="Script" uid="uid://cjf0utjrhm6lb" path="res://C# Scripts/Level/PassedPipeArea.cs" id="1_fxo1b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wy224"]
+
+[node name="PassedPipeArea" type="Area2D"]
+script = ExtResource("1_fxo1b")
+
+[node name="PassingShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wy224")

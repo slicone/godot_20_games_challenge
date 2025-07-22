@@ -1,18 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://bblwidsl33ute"]
+[gd_scene load_steps=6 format=3 uid="uid://bblwidsl33ute"]
 
 [ext_resource type="Script" uid="uid://cwbpvo1hckndx" path="res://C# Scripts/Player/Player.cs" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://bhsrpsn6ghvjg" path="res://Art/Player/player.png" id="2_6t5aa"]
+[ext_resource type="Script" uid="uid://ce8f75bgph05l" path="res://C# Scripts/Player/Collision.cs" id="3_6t5aa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6t5aa"]
+radius = 7.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q12u6"]
-radius = 6.0
-height = 14.0
+radius = 8.0
+height = 16.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Collision")]
 texture_filter = 1
 script = ExtResource("1_cvnsp")
+Collision = NodePath("Collision")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_6t5aa")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6t5aa")
+
+[node name="Collision" type="Area2D" parent="."]
+script = ExtResource("3_6t5aa")
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="Collision"]
 shape = SubResource("CapsuleShape2D_q12u6")
