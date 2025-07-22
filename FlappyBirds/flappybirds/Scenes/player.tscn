@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bblwidsl33ute"]
+
+[ext_resource type="Script" uid="uid://cwbpvo1hckndx" path="res://C# Scripts/Player/Player.cs" id="1_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://bhsrpsn6ghvjg" path="res://Art/Player/player.png" id="2_6t5aa"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q12u6"]
+radius = 6.0
+height = 14.0
+
+[node name="Player" type="CharacterBody2D"]
+texture_filter = 1
+script = ExtResource("1_cvnsp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_6t5aa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_q12u6")

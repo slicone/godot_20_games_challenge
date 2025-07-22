@@ -1,1 +1,3 @@
-# godot_20_games_challenge
+# 20 Game challenge with godot
+
+First Game: Flappy Birds
