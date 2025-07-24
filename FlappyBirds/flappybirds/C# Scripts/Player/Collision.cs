@@ -32,7 +32,7 @@ public partial class Collision : Area2D
 
     private void PlayerDies()
     {
-        _player.QueueFree(); 
+        //_player.QueueFree(); 
         EmitSignal(SignalName.PlayerCollided);
     }
 

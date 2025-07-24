@@ -12,6 +12,7 @@ public partial class PassedPipeArea : Area2D
 
     private void OnBodyEntered(Node2D body)
     {
+        GD.Print("passed");
         EmitSignal(SignalName.PlayerPassedPipe); 
     }
 

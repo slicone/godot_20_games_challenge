@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxs6cp6eumhhm"]
+
+[ext_resource type="Script" uid="uid://bnkdmcb158plp" path="res://C# Scripts/Level/LevelState.cs" id="1_tj5wv"]
+[ext_resource type="Script" uid="uid://by6d7p0sk5ns0" path="res://C# Scripts/Level/GameManager.cs" id="2_ienac"]
+[ext_resource type="PackedScene" uid="uid://eavdn5mlwd6m" path="res://Scenes/chunks/mid_pipe.tscn" id="4_or7tv"]
+[ext_resource type="PackedScene" uid="uid://bblwidsl33ute" path="res://Scenes/player.tscn" id="5_133si"]
+[ext_resource type="PackedScene" uid="uid://dal182j2e3bnx" path="res://Scenes/passed_pipe_area.tscn" id="6_esopp"]
+
+[node name="Level1" type="Node2D"]
+texture_filter = 1
+
+[node name="LevelState" type="Node" parent="." node_paths=PackedStringArray("Player")]
+script = ExtResource("1_tj5wv")
+Player = NodePath("../Player")
+
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("_scene")]
+script = ExtResource("2_ienac")
+_scene = NodePath("../Node")
+_groups = Array[PackedScene]([ExtResource("4_or7tv")])
+
+[node name="Player" parent="." instance=ExtResource("5_133si")]
+texture_filter = 0
+position = Vector2(123, 70)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+visible = false
+
+[node name="PassedPipeArea" parent="." instance=ExtResource("6_esopp")]
+position = Vector2(124, 99)
+
+[node name="Node" type="Node2D" parent="."]
