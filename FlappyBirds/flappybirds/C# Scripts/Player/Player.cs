@@ -9,7 +9,6 @@ public partial class Player : CharacterBody2D
 
     public override void _Ready()
     {
-        Velocity += new Vector2(BASE_X_VELOCITY, 0);
         if (Collision is null)
         {
             GD.PushError("Player missing area collison dependency");
@@ -27,11 +26,7 @@ public partial class Player : CharacterBody2D
     public override void _PhysicsProcess(double delta)
     {
         if (!IsOnFloor())
-        {
             Velocity += GetGravity() * (float)delta;
-            // base velocity x
-            Velocity = new Vector2(BASE_X_VELOCITY, Velocity.Y);
-        }
 
         HandleUserInput();
         MoveAndSlide();
