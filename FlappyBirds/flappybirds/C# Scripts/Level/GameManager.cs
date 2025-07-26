@@ -4,28 +4,27 @@ using Godot;
 public partial class GameManager : Node
 {
     // if chunk is original size, there will be a gap if chunk is reused
-    private const float _groupLength = 90f;
+    private const float _chunkLength = 90f;
     // Is moved to the left and has objects as a child
     [Export] private Node2D _scene;
     [Export] private PackedScene[] _groups;
-    private float _levelSpeed = 100f;
+    private float _levelSpeed = 75f;
 
     // starting point of first chunk. needed for init
-    private const int _chunkLeftOffset = -1;
+    private const int _chunkLeftOffset = -2;
     // will be used to determine where a chunk has to be moved to right
     private const int _chunkRightOffset = 3;
 
     private float currenProgress = 0f;
 
     public override void _Ready()
-    {   
+    {
         // starting chunks
-        for (int i = -2; i < 2; i++)
+        for (int i = _chunkLeftOffset; i < _chunkRightOffset; i++)
             InstantiateChunk(i, 0);
-        
-        // random chunks
-        for (int i = _chunkLeftOffset; i <= _chunkRightOffset; i++)
-            InstantiateChunk(i);
+
+        // first obstacle chunk at right offset
+        InstantiateChunk(_chunkRightOffset);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -40,13 +39,18 @@ public partial class GameManager : Node
             ((Node2D)n).Translate(Vector2.Left * progress);
 
         currenProgress += progress;
-        if (currenProgress >= _groupLength)
+        if (currenProgress >= _chunkLength)
         {
-            SetOutOfScreenNodeAtEnding();
+            //SetOutOfScreenNodeAtEnding();
+            _scene.GetChild(0).QueueFree();
+            InstantiateChunk(_chunkRightOffset);
             currenProgress = 0f;
         }
     }
 
+    /// <summary>
+    /// Chunks at first first place will be moved to end of chunks if level progression has advanced one chunk length
+    /// </summary>
     private void SetOutOfScreenNodeAtEnding()
     {
         var offScreenNode = _scene.GetChild<Node2D>(0);
@@ -63,7 +67,7 @@ public partial class GameManager : Node
     private void InstantiateChunk(int offset = 3, int type = -1)
     {
         Node2D group = _groups[(type == -1)
-            ? GD.RandRange(0, _groups.Length - 1)
+            ? GD.RandRange(1, _groups.Length - 1) // first chunk is only for beginning of the level
             : type].Instantiate<Node2D>();
         _scene.AddChild(group);
         group.GlobalPosition = CalculateChunkPosition(offset);
@@ -71,7 +75,7 @@ public partial class GameManager : Node
 
     private Vector2 CalculateChunkPosition(int offset)
     {
-       return Vector2.Right * offset * _groupLength; 
+       return Vector2.Right * offset * _chunkLength; 
     }
 
 

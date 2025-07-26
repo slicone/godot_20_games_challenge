@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cc1e62e8qruem"
-path="res://.godot/imported/Solaria Demo Tiles.png-9bcf499941ccdf9679b1f6755d7f5d1e.ctex"
+uid="uid://bqras1lssslgl"
+path="res://.godot/imported/FlappyBirdTileMap.png-d80a239fcc9dced15da4fa7d9b32da1d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/TileMap/Solaria Demo Tiles.png"
-dest_files=["res://.godot/imported/Solaria Demo Tiles.png-9bcf499941ccdf9679b1f6755d7f5d1e.ctex"]
+source_file="res://Art/TileMap/FlappyBirdTileMap.png"
+dest_files=["res://.godot/imported/FlappyBirdTileMap.png-d80a239fcc9dced15da4fa7d9b32da1d.ctex"]
 
 [params]
 
