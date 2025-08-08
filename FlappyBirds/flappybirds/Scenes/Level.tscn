@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cxs6cp6eumhhm"]
+[gd_scene load_steps=10 format=3 uid="uid://cxs6cp6eumhhm"]
 
 [ext_resource type="Script" uid="uid://bnkdmcb158plp" path="res://C# Scripts/Level/LevelState.cs" id="1_tj5wv"]
 [ext_resource type="Script" uid="uid://by6d7p0sk5ns0" path="res://C# Scripts/Level/GameManager.cs" id="2_ienac"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bif1cj7bqsdca" path="res://Scenes/chunks/bottom_low_pipe.tscn" id="4_tj5wv"]
 [ext_resource type="PackedScene" uid="uid://bblwidsl33ute" path="res://Scenes/player.tscn" id="5_133si"]
 [ext_resource type="PackedScene" uid="uid://dhkjwfv58db5w" path="res://Scenes/chunks/top_low_pipe.tscn" id="5_ienac"]
-[ext_resource type="PackedScene" uid="uid://dal182j2e3bnx" path="res://Scenes/passed_pipe_area.tscn" id="6_esopp"]
 [ext_resource type="PackedScene" uid="uid://d2arpiognp4lv" path="res://Scenes/chunks/top_low_low_pipe.tscn" id="6_or7tv"]
 [ext_resource type="PackedScene" uid="uid://cpcdltycpwgd4" path="res://Scenes/chunks/bottom_low_low_pipe.tscn" id="7_133si"]
 
@@ -29,8 +28,5 @@ position = Vector2(123, 70)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 visible = false
-
-[node name="PassedPipeArea" parent="." instance=ExtResource("6_esopp")]
-position = Vector2(124, 99)
 
 [node name="Node" type="Node2D" parent="."]

@@ -7,12 +7,12 @@ public partial class PassedPipeArea : Area2D
     public delegate void PlayerPassedPipeEventHandler();
     public override void _Ready()
     {
-        this.BodyEntered += OnBodyEntered;
+        this.BodyExited += OnBodyExited;
     }
 
-    private void OnBodyEntered(Node2D body)
+    private void OnBodyExited(Node2D body)
     {
-        GD.Print("passed");
+        GD.Print(body);
         EmitSignal(SignalName.PlayerPassedPipe); 
     }
 
