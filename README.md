@@ -2,4 +2,4 @@
 
 First Game: Flappy Birds
 
-Executables for Linux and Windows
+Executables for Linux and Windows (FlappyBirds/Exe)
