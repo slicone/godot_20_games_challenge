@@ -3,6 +3,8 @@ using Godot;
 public partial class Platform : CharacterBody2D
 {
     [Export] public float MoveSpeed { get; set; } = 7000;
+    [Export] public int MaxDirectionAngle { get; set; } = 85;
+    [Export] public Sprite2D Sprite { get; set; }
             
     public override void _PhysicsProcess(double delta)
     {
