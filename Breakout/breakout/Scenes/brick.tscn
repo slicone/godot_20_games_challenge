@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://ce77owpai0o25"]
+
+[ext_resource type="Script" uid="uid://bxlwpq5uxqjeq" path="res://C#Scripts/Brick.cs" id="1_hqb1c"]
+[ext_resource type="Texture2D" uid="uid://db7e8v4apbwoq" path="res://Art/export/brick_red.png" id="1_lvh1d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqb1c"]
+size = Vector2(32, 10)
+
+[node name="Brick" type="StaticBody2D" node_paths=PackedStringArray("texture")]
+script = ExtResource("1_hqb1c")
+texture = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lvh1d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hqb1c")

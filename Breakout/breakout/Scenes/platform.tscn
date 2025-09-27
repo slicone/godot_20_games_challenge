@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dnnlvtagibiw1" path="res://Art/export/Platform.png" id="2_n5262"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrs20"]
-size = Vector2(40, 8)
+size = Vector2(40, 6)
 
 [node name="Platform" type="CharacterBody2D" node_paths=PackedStringArray("Sprite")]
 script = ExtResource("1_1rc8e")

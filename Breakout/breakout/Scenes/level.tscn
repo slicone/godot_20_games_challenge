@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2x5a5ntjlr55"]
+[gd_scene load_steps=7 format=3 uid="uid://b2x5a5ntjlr55"]
 
 [ext_resource type="Script" uid="uid://bli4f4xektpnt" path="res://C#Scripts/VerticalWall.cs" id="1_81xng"]
 [ext_resource type="PackedScene" uid="uid://b08fu4ipef65n" path="res://Scenes/platform.tscn" id="1_tumq0"]
 [ext_resource type="PackedScene" uid="uid://bf6cfbygykk4v" path="res://Scenes/ball.tscn" id="2_k5f4k"]
 [ext_resource type="Script" uid="uid://cu6kmsj23oq6y" path="res://C#Scripts/HorizontalWall.cs" id="2_wqkje"]
+[ext_resource type="Script" uid="uid://bmxfma6utbg2m" path="res://C#Scripts/BrickManager.cs" id="5_0f350"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_51e2h"]
 
@@ -14,12 +15,12 @@ texture_filter = 1
 script = ExtResource("1_81xng")
 
 [node name="left" type="CollisionShape2D" parent="VerticalWall"]
-position = Vector2(0, 111.11)
+position = Vector2(0, 126)
 rotation = 1.5708
 shape = SubResource("WorldBoundaryShape2D_51e2h")
 
 [node name="right" type="CollisionShape2D" parent="VerticalWall"]
-position = Vector2(384, 111.11)
+position = Vector2(448, 126)
 rotation = -1.5708
 shape = SubResource("WorldBoundaryShape2D_51e2h")
 
@@ -27,16 +28,19 @@ shape = SubResource("WorldBoundaryShape2D_51e2h")
 script = ExtResource("2_wqkje")
 
 [node name="top" type="CollisionShape2D" parent="HorizontalWall"]
-position = Vector2(190, 0)
+position = Vector2(224, 0)
 rotation = 3.14159
 shape = SubResource("WorldBoundaryShape2D_51e2h")
 
 [node name="bottom" type="CollisionShape2D" parent="HorizontalWall"]
-position = Vector2(190, 217.58)
+position = Vector2(224, 252)
 shape = SubResource("WorldBoundaryShape2D_51e2h")
 
 [node name="Platform" parent="." instance=ExtResource("1_tumq0")]
-position = Vector2(189, 196)
+position = Vector2(224, 246.275)
 
 [node name="Ball" parent="." instance=ExtResource("2_k5f4k")]
-position = Vector2(107, 61)
+position = Vector2(144, 122)
+
+[node name="BrickManager" type="Node" parent="."]
+script = ExtResource("5_0f350")

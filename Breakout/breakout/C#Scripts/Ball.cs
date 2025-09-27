@@ -24,7 +24,7 @@ public partial class Ball : CharacterBody2D
 
         if (body is Platform platform)
         {
-            calculateNewBallAngle(platform);
+            CalculateNewBallAngle(platform);
             return;
         }
 
@@ -38,16 +38,28 @@ public partial class Ball : CharacterBody2D
             Velocity = Velocity.Reflect(Vector2.Right);
         }
 
+        if (body is Brick brick)
+        {
+            Velocity = Velocity.Reflect(Vector2.Right);
+            brick.QueueFree();   
+        }
+
     }
 
-    private void calculateNewBallAngle(Platform platform)
+    private void CalculateNewBallAngle(Platform platform)
     {
         var relativePlatformHit = (GlobalPosition.X - platform.GlobalPosition.X) / (platform.Sprite.Texture.GetWidth() / 2);
-        var newAngle = Mathf.Lerp(60, platform.MaxDirectionAngle, relativePlatformHit);
-        var angleInRadiant = Mathf.DegToRad(newAngle);
-        Velocity = relativePlatformHit >= 0 ?
-                        new Vector2(BallSpeed * MathF.Cos(angleInRadiant), BallSpeed * MathF.Sin(angleInRadiant) * -1) : // in godot > 0 is down and not up, because of that make it < 0
-                        new Vector2(BallSpeed * MathF.Cos(angleInRadiant) * -1, BallSpeed * MathF.Sin(angleInRadiant) * -1); // direct in negative x, because plattform hit left part of platform 
+        if (relativePlatformHit < 0) {
+            // shift range of relativePlatformHit values between 0 and 1
+            // otherwise angle will be under the minimal reflective angle
+            var newAngle = Mathf.Lerp(platform.MaxDirectionAngle, platform.MinDirectionAngle, relativePlatformHit * -1);
+            var angleInRadiant = Mathf.DegToRad(newAngle);
+            Velocity = new Vector2(BallSpeed * MathF.Cos(angleInRadiant) * -1, BallSpeed * MathF.Sin(angleInRadiant) * -1); // direct in negative x, because plattform hit left part of platform 
+        } else {
+            var newAngle = Mathf.Lerp(platform.MaxDirectionAngle, platform.MinDirectionAngle, relativePlatformHit);
+            var angleInRadiant = Mathf.DegToRad(newAngle);
+            Velocity = new Vector2(BallSpeed * MathF.Cos(angleInRadiant), BallSpeed * MathF.Sin(angleInRadiant) * -1); // in godot > 0 is down and not up, because of that make it < 0
+        }
     }
 
 
