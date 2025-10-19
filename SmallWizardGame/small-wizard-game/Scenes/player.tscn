@@ -1,0 +1,80 @@
+[gd_scene load_steps=14 format=3 uid="uid://c6om3j5rle1fd"]
+
+[ext_resource type="Script" uid="uid://d02f0ybl22d3s" path="res://C#Scripts/Player/Player.cs" id="1_hnuln"]
+[ext_resource type="Texture2D" uid="uid://ceelyc84rmxp1" path="res://Art/png/wizard.png" id="2_igrcy"]
+[ext_resource type="PackedScene" uid="uid://dl7t35yvoi3m5" path="res://Scenes/health_component.tscn" id="3_mtuoh"]
+[ext_resource type="PackedScene" uid="uid://n45isauu1rkp" path="res://Scenes/hitbox_component.tscn" id="4_htcer"]
+[ext_resource type="PackedScene" path="res://Scenes/state_machine.tscn" id="7_74mp2"]
+[ext_resource type="Script" uid="uid://bgumwo5pneyt6" path="res://C#Scripts/State/IdleState.cs" id="9_r5xpd"]
+[ext_resource type="Script" uid="uid://cmxxcqiogmoiu" path="res://C#Scripts/State/JumpState.cs" id="10_ks1b7"]
+[ext_resource type="Script" uid="uid://d1540urggk0r0" path="res://C#Scripts/State/FallState.cs" id="11_hnuln"]
+[ext_resource type="Script" uid="uid://b7xnkre26o5s7" path="res://C#Scripts/State/MoveState.cs" id="12_aqm4k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mtuoh"]
+size = Vector2(26, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kpjcp"]
+size = Vector2(26, 52)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_gymyn"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pu2lt"]
+states/Movement/node = SubResource("AnimationNodeBlendTree_gymyn")
+states/Movement/position = Vector2(440, 76)
+graph_offset = Vector2(-56, -79)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("StateMachine", "HitboxComponent", "HealthComponent")]
+texture_filter = 1
+script = ExtResource("1_hnuln")
+StateMachine = NodePath("state_machine")
+HitboxComponent = NodePath("HitboxComponent")
+HealthComponent = NodePath("HealthComponent")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 3)
+shape = SubResource("RectangleShape2D_mtuoh")
+
+[node name="Player" type="Sprite2D" parent="."]
+texture = ExtResource("2_igrcy")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_mtuoh")]
+script = null
+
+[node name="HitboxComponent" parent="." instance=ExtResource("4_htcer")]
+script = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(-3, 3)
+shape = SubResource("RectangleShape2D_kpjcp")
+
+[node name="state_machine" parent="." node_paths=PackedStringArray("StartingState") instance=ExtResource("7_74mp2")]
+StartingState = NodePath("idle")
+
+[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("FallState", "JumpState", "MoveState")]
+script = ExtResource("9_r5xpd")
+FallState = NodePath("../fall")
+JumpState = NodePath("../jump")
+MoveState = NodePath("../move")
+AnimationName = "idle"
+
+[node name="jump" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState", "MoveState", "FallState")]
+script = ExtResource("10_ks1b7")
+IdleState = NodePath("../idle")
+MoveState = NodePath("../move")
+FallState = NodePath("../fall")
+
+[node name="fall" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState", "MoveState")]
+script = ExtResource("11_hnuln")
+IdleState = NodePath("../idle")
+MoveState = NodePath("../move")
+
+[node name="move" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState", "FallState", "JumpState")]
+script = ExtResource("12_aqm4k")
+IdleState = NodePath("../idle")
+FallState = NodePath("../fall")
+JumpState = NodePath("../jump")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_pu2lt")

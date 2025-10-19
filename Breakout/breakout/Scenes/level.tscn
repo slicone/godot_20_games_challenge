@@ -1,10 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2x5a5ntjlr55"]
+[gd_scene load_steps=12 format=3 uid="uid://b2x5a5ntjlr55"]
 
 [ext_resource type="Script" uid="uid://bli4f4xektpnt" path="res://C#Scripts/VerticalWall.cs" id="1_81xng"]
 [ext_resource type="PackedScene" uid="uid://b08fu4ipef65n" path="res://Scenes/platform.tscn" id="1_tumq0"]
 [ext_resource type="PackedScene" uid="uid://bf6cfbygykk4v" path="res://Scenes/ball.tscn" id="2_k5f4k"]
-[ext_resource type="Script" uid="uid://cu6kmsj23oq6y" path="res://C#Scripts/HorizontalWall.cs" id="2_wqkje"]
+[ext_resource type="Script" uid="uid://drcqph8s0qxwa" path="res://C#Scripts/Ceiling.cs" id="2_wqkje"]
+[ext_resource type="Script" uid="uid://b2w6tiwv5mw1m" path="res://C#Scripts/Bottom.cs" id="3_754fn"]
 [ext_resource type="Script" uid="uid://bmxfma6utbg2m" path="res://C#Scripts/BrickManager.cs" id="5_0f350"]
+[ext_resource type="Script" uid="uid://bl7js404u74s0" path="res://C#Scripts/LevelManager.cs" id="6_0f350"]
+[ext_resource type="Script" uid="uid://mpbxq433hfhq" path="res://C#Scripts/Score.cs" id="7_8c0lf"]
+[ext_resource type="Script" uid="uid://dluvyaa07vc4b" path="res://C#Scripts/Ui.cs" id="8_oqgf2"]
+[ext_resource type="Script" uid="uid://dia2yx48xtnvt" path="res://C#Scripts/Life.cs" id="10_qxfql"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_51e2h"]
 
@@ -24,15 +29,18 @@ position = Vector2(448, 126)
 rotation = -1.5708
 shape = SubResource("WorldBoundaryShape2D_51e2h")
 
-[node name="HorizontalWall" type="StaticBody2D" parent="."]
+[node name="Ceiling" type="StaticBody2D" parent="."]
 script = ExtResource("2_wqkje")
 
-[node name="top" type="CollisionShape2D" parent="HorizontalWall"]
+[node name="top" type="CollisionShape2D" parent="Ceiling"]
 position = Vector2(224, 0)
 rotation = 3.14159
 shape = SubResource("WorldBoundaryShape2D_51e2h")
 
-[node name="bottom" type="CollisionShape2D" parent="HorizontalWall"]
+[node name="Bottom" type="StaticBody2D" parent="."]
+script = ExtResource("3_754fn")
+
+[node name="bottom" type="CollisionShape2D" parent="Bottom"]
 position = Vector2(224, 252)
 shape = SubResource("WorldBoundaryShape2D_51e2h")
 
@@ -44,3 +52,34 @@ position = Vector2(144, 122)
 
 [node name="BrickManager" type="Node" parent="."]
 script = ExtResource("5_0f350")
+
+[node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("Ball")]
+script = ExtResource("6_0f350")
+Ball = NodePath("../Ball")
+
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("LevelManager")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_oqgf2")
+LevelManager = NodePath("../LevelManager")
+
+[node name="Score" type="RichTextLabel" parent="UI"]
+offset_left = 10.0
+offset_right = 80.0
+offset_bottom = 28.0
+text = "Score: 0"
+script = ExtResource("7_8c0lf")
+
+[node name="Life" type="RichTextLabel" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 347.0
+offset_right = 408.0
+offset_bottom = 40.0
+grow_horizontal = 0
+text = "Life: -1"
+script = ExtResource("10_qxfql")

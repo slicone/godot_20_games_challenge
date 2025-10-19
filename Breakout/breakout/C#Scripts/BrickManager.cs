@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class BrickManager : Node
 {
@@ -22,7 +21,7 @@ public partial class BrickManager : Node
             {
                 var brick = brickScene.Instantiate<Brick>();
                 var initPosX = (brick.Width() / 2) + BrickGap;
-                var initPosY = (brick.Height() / 2) + BrickGap;
+                var initPosY = (brick.Height() / 2) + BrickGap + 20;
                 var brickXPos =  initPosX + (brick.Width() * j) + BrickGap * j;
                 var brickYPos =  initPosY + (brick.Height() * i) + BrickGap * i;  
                 brick.GlobalPosition = new Vector2(brickXPos, brickYPos);
