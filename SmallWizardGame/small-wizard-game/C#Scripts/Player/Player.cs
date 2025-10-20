@@ -6,6 +6,7 @@ public partial class Player : CharacterBody2D
 	[Export] public StateMachine StateMachine { get; set; }
 	[Export] public HitboxComponent HitboxComponent { get; set; }
 	[Export] public HealthComponent HealthComponent { get; set; }
+	[Export] public AnimationTreeHandler animationTreeHandler { get; set; }
 	[Export] public float MoveSpeed { get; set; } = 200f;
 	[Export] public float StopSpeed { get; set; } = 50f;
 	[Export] public float JumpVelocity { get; set; } = -200.0f;
@@ -18,11 +19,14 @@ public partial class Player : CharacterBody2D
 
 	public override void _Ready()
 	{
-		if (HealthComponent != null)
+		if (HealthComponent is not null)
 			HealthComponent.EntityDied += OnPlayerDied;
 
-		if (HitboxComponent != null && HealthComponent != null)
+		if (HitboxComponent is not null && HealthComponent is not null)
 			HitboxComponent.HealthComponent = HealthComponent;
+
+		if (animationTreeHandler is null)
+			GD.PrintErr("Animation Tree Handler dependency missing in player");
 
 		StateMachine.Init(this);
 	}
@@ -46,8 +50,11 @@ public partial class Player : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		StateMachine.ProcessPhysics(delta);
+		var direction = Input.GetAxis("move-left", "move-right");
+		animationTreeHandler.UpdatePlayerBlendPosition(direction);
 	}
-
+	
+	
 
 	public void SetVelocityOnMovement(float movement)
 	{

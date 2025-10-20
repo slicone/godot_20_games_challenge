@@ -13,6 +13,7 @@ public partial class JumpState : State
 
     public override void Enter()
     {
+		Parent.animationTreeHandler?.SetAnimationTreeParameter("parameters/BasicMovement/movement/transition_request", "jump");
         // Apply vertical jump velocity
 		Parent.Velocity = new Vector2(Parent.Velocity.X, Parent.JumpVelocity);
     }
@@ -20,7 +21,6 @@ public partial class JumpState : State
 
 	public override State ProcessInput(InputEvent @event)
 	{
-		CheckNonStateInput();
 		return null;
 	}
 

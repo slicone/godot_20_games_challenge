@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class IdleState : State
 {
@@ -8,29 +7,22 @@ public partial class IdleState : State
 	[Export] public State MoveState { get; set; }
 
 	public override void Enter()
-	{
-	}
-
-	public override void Exit()
-	{
-	}
-
+    {
+		Parent.animationTreeHandler?.SetAnimationTreeParameter("parameters/BasicMovement/movement/transition_request", "idle");
+    }
 
 	public override State ProcessInput(InputEvent @event)
 	{
-		CheckNonStateInput();
 		if (Input.IsActionJustPressed("jump") && Parent.IsOnFloor())
 			return JumpState;
-
-		if (Input.IsActionJustPressed("move-left") || Input.IsActionJustPressed("move-right"))
-			return MoveState;
 
 		return null;
 	}
 
 	public override State ProcessPhysics(double delta)
 	{
-		float movement = Input.GetAxis("move-left", "move-right") * Parent.MoveSpeed;
+		float movement = Input.GetAxis("move-left", "move-right") * Parent.MoveSpeed;	
+
 		if (!Parent.IsOnFloor())
 			return FallState;
 

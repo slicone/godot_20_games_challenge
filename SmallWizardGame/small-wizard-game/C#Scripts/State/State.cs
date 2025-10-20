@@ -34,21 +34,4 @@ public partial class State : Node
 		return null;
 	}
 
-	protected void CheckNonStateInput()
-	{
-		if (Input.IsActionJustPressed("interact"))
-		{
-			Parent.TriggerInteract();
-		}
-
-		if (Input.IsActionJustPressed("drop"))
-		{
-			Parent.TriggerDrop();
-		}
-
-		if (Input.IsActionJustPressed("attack"))
-		{
-			Parent.TriggerAttack();
-		}
-	}
 }

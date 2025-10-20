@@ -5,9 +5,13 @@ public partial class FallState : State
 	[Export] public State IdleState { get; set; }
 	[Export] public State MoveState { get; set; }
 
+    public override void Enter()
+    {
+		Parent.animationTreeHandler?.SetAnimationTreeParameter("parameters/BasicMovement/movement/transition_request", "fall");
+    }
+
 	public override State ProcessInput(InputEvent @event)
 	{
-		CheckNonStateInput();
 		return null;
 	}
 

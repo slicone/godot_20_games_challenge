@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Net.Http.Headers;
 
 public partial class MoveState : State
 {
@@ -10,16 +9,11 @@ public partial class MoveState : State
 
 	public override void Enter()
 	{
+		Parent.animationTreeHandler?.SetAnimationTreeParameter("parameters/BasicMovement/movement/transition_request", "run");
 	}
-
-    public override void Exit()
-    {
-    }
-
 
 	public override State ProcessInput(InputEvent @event)
 	{
-		CheckNonStateInput();
 
 		if (Input.IsActionJustPressed("jump") && Parent.IsOnFloor())
 			return JumpState;
@@ -29,7 +23,7 @@ public partial class MoveState : State
 
 	public override State ProcessPhysics(double delta)
 	{
-		float movement = Input.GetAxis("move-left", "move-right") * Parent.MoveSpeed;
+		var movement = Input.GetAxis("move-left", "move-right") * Parent.MoveSpeed;
 
 		if (!Parent.IsOnFloor())
 			return FallState;
