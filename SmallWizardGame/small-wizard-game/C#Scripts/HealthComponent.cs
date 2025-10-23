@@ -34,7 +34,6 @@ public partial class HealthComponent : Node2D
 
         ForceEntityKnockback(attack, entity);
         CalculateEntityHealth(attack);
-        CheckIfEntityDies(entity, attack.WeaponType);
     }
 
     private void CalculateEntityHealth(Attack attack)

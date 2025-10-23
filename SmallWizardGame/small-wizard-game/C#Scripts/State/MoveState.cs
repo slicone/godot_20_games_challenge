@@ -14,9 +14,9 @@ public partial class MoveState : State
 
 	public override State ProcessInput(InputEvent @event)
 	{
-
 		if (Input.IsActionJustPressed("jump") && Parent.IsOnFloor())
 			return JumpState;
+		GenericInput();
 
 		return null;
 	}

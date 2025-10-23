@@ -12,6 +12,8 @@ public partial class Player : CharacterBody2D
 	[Export] public float JumpVelocity { get; set; } = -200.0f;
 	[Export] public float FallVelocity { get; set; } = -9.81f;
 
+	[Export] public AbstractWand Wand { get; set; }
+
 	[Signal] public delegate void PlayerDiedEventHandler();
 	[Signal] public delegate void AttackEventHandler();
 	[Signal] public delegate void InteractEventHandler();

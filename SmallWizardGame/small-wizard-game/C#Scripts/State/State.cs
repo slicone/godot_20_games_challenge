@@ -34,4 +34,12 @@ public partial class State : Node
 		return null;
 	}
 
+	protected void GenericInput()
+    {
+		if(Input.IsActionJustPressed("attack"))
+        {
+			Parent.Wand.Attack();
+        }
+    }
+
 }

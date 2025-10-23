@@ -1,15 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfsrsduqrtxn"]
+[gd_scene load_steps=4 format=3 uid="uid://cfsrsduqrtxn"]
 
-[ext_resource type="PackedScene" uid="uid://c6om3j5rle1fd" path="res://Scenes/player.tscn" id="1_0q2ej"]
+[ext_resource type="PackedScene" uid="uid://c6om3j5rle1fd" path="res://Scenes/Player/player.tscn" id="1_0q2ej"]
+[ext_resource type="PackedScene" uid="uid://cvffqg0tq2aji" path="res://Scenes/Player/WandSystem/wand.tscn" id="2_1jgjr"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_45t4w"]
 
 [node name="SandboxLevel" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_0q2ej")]
+position = Vector2(33, 147)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(120, 180)
+shape = SubResource("WorldBoundaryShape2D_45t4w")
+
+[node name="Wand" parent="." instance=ExtResource("2_1jgjr")]
+position = Vector2(66, 148)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(240, 91.21)
+rotation = -1.5707964
 shape = SubResource("WorldBoundaryShape2D_45t4w")

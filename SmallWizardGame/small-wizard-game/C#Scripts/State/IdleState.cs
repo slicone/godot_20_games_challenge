@@ -15,6 +15,7 @@ public partial class IdleState : State
 	{
 		if (Input.IsActionJustPressed("jump") && Parent.IsOnFloor())
 			return JumpState;
+		GenericInput();
 
 		return null;
 	}

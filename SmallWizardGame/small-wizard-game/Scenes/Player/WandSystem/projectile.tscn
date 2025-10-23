@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://coo5vksschi68"]
+
+[ext_resource type="Script" uid="uid://8ogvana6skah" path="res://C#Scripts/Player/WandSystem/Projectile.cs" id="1_yr2qt"]
+[ext_resource type="Texture2D" uid="uid://by0krnc2tyalm" path="res://Art/png/projectile.png" id="2_tl4hk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bcswe"]
+size = Vector2(9.015, 1.01)
+
+[node name="Projectile" type="Area2D"]
+script = ExtResource("1_yr2qt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bcswe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_tl4hk")
