@@ -2,5 +2,9 @@
 
 [ext_resource type="Script" uid="uid://ima4tltfg84f" path="res://C#Scripts/Player/WandSystem/Wand.cs" id="1_qsrja"]
 
-[node name="Wand" type="Node2D"]
+[node name="Wand" type="Node2D" node_paths=PackedStringArray("CooldownTimer")]
 script = ExtResource("1_qsrja")
+CooldownTimer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

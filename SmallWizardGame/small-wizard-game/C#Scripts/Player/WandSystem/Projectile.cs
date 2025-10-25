@@ -27,7 +27,7 @@ public partial class Projectile : Area2D
 
     private void CollidedWithArea(Area2D area)
     {
-        if(area is HitboxComponent hitbox)
+        if (area is HitboxComponent hitbox)
         {
             hitbox.Damage(attack);
         }

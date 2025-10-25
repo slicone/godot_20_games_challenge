@@ -32,7 +32,6 @@ public partial class StateMachine : Node
 		{
 			_currentState.Exit();
 		}
-		GD.Print(newState.Name);
 
 		_currentState = newState;
 		_currentState.Enter();
